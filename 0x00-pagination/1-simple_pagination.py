@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Simple pagination
-    Copy index_range from the previous task
+"""Implement a method named get_page that takes two integer arguments
 """
 import csv
 from typing import List, Tuple
@@ -45,3 +44,4 @@ class Server:
         if start > len(data):
             return []
         return data[start:end]
+    
