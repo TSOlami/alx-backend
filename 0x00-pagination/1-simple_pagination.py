@@ -1,6 +1,14 @@
 import csv
-import math
-from typing import List
+from typing import Tuple, List
+
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """
+    A start index and an end index corresponding to the range of indexes
+    """
+    start_index = (page - 1) * page_size
+    end_index = start_index * page_size
+    return (start_index, end_index)
 
 
 class Server:
@@ -9,6 +17,9 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """
+        Initializes a new Server instance.
+        """
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -23,13 +34,14 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
-    
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    A start index and an end index corresponding to the range of indexes
-    """
-    start_index = (page - 1) * page_size
-    end_index = start_index * page_size
-    return (start_index, end_index)
+        """
+        Use assert to verify that both arguments are integers greater than 0
+        """
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
+        # Use index_range to find the correct indexes to paginate
+        start, end = index_range(page, page_size)
+        data = self.dataset()
+        if start > len(data):
+            return []
+        return data[start:end]
