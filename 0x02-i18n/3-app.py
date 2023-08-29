@@ -25,7 +25,7 @@ babel = Babel(app)
 def get_locale() -> str:
     """Determine the best match with our supported languages.
     """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route('/')
@@ -33,8 +33,8 @@ def index() -> str:
     """Function that returns an index page
     """
     return render_template(
-        "3-index.html")
+        '3-index.html')
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
