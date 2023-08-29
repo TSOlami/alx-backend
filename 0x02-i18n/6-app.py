@@ -34,9 +34,9 @@ babel = Babel(app)
 def get_user() -> Union[Dict, None]:
     """Module for getting a user details
     """
-    login_id = request.args.get('login_as')
+    login_id = request.args.get('login_as', '')
     if login_id:
-        return users.get(int(login_id))
+        return users.get(int(login_id), None)
     return None
 
 
@@ -53,7 +53,7 @@ def get_locale() -> str:
     """
 
     # Get the value of 'locale' from URL parameter
-    locale = request.args.get('locale')
+    locale = request.args.get('locale', '')
     if locale in app.config["LANGUAGES"]:
         return locale  # Use the provided locale if it's valid
 
@@ -64,7 +64,7 @@ def get_locale() -> str:
             return locale
 
         # Get the value of 'locale' from request header
-    locale = request.headers.get('locale', None)
+    locale = request.headers.get('locale', '')
     if locale in app.config["LANGUAGES"]:
         return locale
 
