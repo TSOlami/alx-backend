@@ -3,7 +3,7 @@
 Create a single / route and an index.html template
 """
 from flask import Flask, render_template, request, g
-from flask_babel import Babel, _
+from flask_babel import Babel
 from typing import Dict, Union
 
 # Mock user data
@@ -54,22 +54,22 @@ def get_locale() -> str:
 
     # Get the value of 'locale' from URL parameter
     locale = request.args.get('locale')
-    if locale in app.config['LANGUAGES']:
+    if locale in app.config["LANGUAGES"]:
         return locale  # Use the provided locale if it's valid
 
         # Get the value of 'locale' from user settings
     if g.user:
         locale = g.user.get('locale')
-        if locale and locale in app.config['LANGUAGES']:
+        if locale and locale in app.config["LANGUAGES"]:
             return locale
 
         # Get the value of 'locale' from request header
     locale = request.headers.get('locale', None)
-    if locale in app.config['LANGUAGES']:
+    if locale in app.config["LANGUAGES"]:
         return locale
 
     # Fall back to the default behavior
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route('/')
@@ -77,8 +77,8 @@ def index() -> str:
     """Function that returns an index page
     """
     return render_template(
-        "6-index.html", title=_("home_title"), header=_("home_header"))
+        '6-index.html')
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
