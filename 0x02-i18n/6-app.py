@@ -59,7 +59,7 @@ def get_locale() -> str:
 
         # Get the value of 'locale' from user settings
     if g.user:
-        locale = g.user.get('locale')
+        locale = g.user.get('locale', '')
         if locale and locale in app.config["LANGUAGES"]:
             return locale
 
