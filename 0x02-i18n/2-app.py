@@ -6,7 +6,7 @@ from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
-class Config():
+class Config(object):
     """Class to configure available languages in our app"""
 
     LANGUAGES = ["en", "fr"]
@@ -29,7 +29,7 @@ def index():
 def get_locale():
     """Determine the best match with our supported languages.
     """
-    return request.accept_languages.best_match(Config.LANGUAGES)
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == '__main__':
