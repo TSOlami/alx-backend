@@ -2,11 +2,11 @@
 """Setup a basic Flask app in 1-app.py.
 Create a single / route and an index.html template
 """
-from flask import Flask, render_template
-from flask_babel import Babel
+from flask import Flask, render_template, request
+from flask_babel import Babel, _
 
 
-class Config():
+class Config(object):
     """Class to configure available languages in our app"""
 
     LANGUAGES = ["en", "fr"]
@@ -22,7 +22,15 @@ babel = Babel(app)
 @app.route('/')
 def index():
     """Function that returns an index page"""
-    return render_template("1-index.html")
+    return render_template(
+        "3-index.html", title=_("home_title"), header=_("home_header"))
+
+
+@babel.localeselector
+def get_locale():
+    """Determine the best match with our supported languages.
+    """
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == '__main__':
