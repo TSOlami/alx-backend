@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Setup a basic Flask app in 1-app.py.
-Create a single / route and an index.html template
+"""Parametrize templates
 """
-from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask import Flask
+from flask_babel import Babel
+from flask import render_template, request
 
 
-class Config(object):
-    """Class to configure available languages in our app"""
-
+class Config:
+    """Flask Babel configuration.
+    """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -16,22 +16,23 @@ class Config(object):
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.url_map.strict_slashes = False
 babel = Babel(app)
-
-
-@app.route('/')
-def index() -> str:
-    """Function that returns an index page"""
-    return render_template(
-        "3-index.html", title=_("home_title"), header=_("home_header"))
 
 
 @babel.localeselector
 def get_locale() -> str:
-    """Determine the best match with our supported languages.
+    """ _ or gettext function to parametrize your templates
     """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
+
+
+@app.route('/')
+def get_index() -> str:
+    """The home/index page.
+    """
+    return render_template('3-index.html')
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
