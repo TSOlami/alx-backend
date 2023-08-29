@@ -3,11 +3,12 @@
 Create a single / route and an index.html template
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
 class Config(object):
-    """Class to configure available languages in our app"""
+    """Class to configure available languages in our app
+    """
 
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -29,7 +30,8 @@ def get_locale() -> str:
 
 @app.route('/')
 def index() -> str:
-    """Function that returns an index page"""
+    """Function that returns an index page
+    """
     return render_template(
         "3-index.html")
 
