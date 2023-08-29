@@ -4,6 +4,7 @@ Create a single / route and an index.html template
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
+from typing import Union, Dict
 
 # Mock user data
 users = {
@@ -29,7 +30,7 @@ app.url_map.strict_slashes = False
 babel = Babel(app)
 
 
-def get_user():
+def get_user() -> Union[Dict, None]:
     """Module for getting a user details"""
     login_id = request.args.get('login_as')
     if login_id:
@@ -44,7 +45,7 @@ def before_request():
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Determine the best match with our supported languages.
     """
     locale = request.args.get('locale')  # Get the value of 'locale' parameter
@@ -56,7 +57,7 @@ def get_locale():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """Function that returns an index page"""
     return render_template(
         "5-index.html", title=_("home_title"), header=_("home_header"))

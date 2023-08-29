@@ -78,7 +78,7 @@ def get_timezone():
     """Return a URL-provided or user time zone or set default to UTC
     """
 
-	# Get the value of 'timezone' from URL parameter
+    # Get the value of 'timezone' from URL parameter
     timez = request.args.get('timezone')
     if timez:
         try:
@@ -86,13 +86,13 @@ def get_timezone():
             return timezone(timez).zone
         except pytz.exceptions.UnknownTimeZoneError:
             pass
-    
+
     # Get the value of 'timezone' from user settings
     if g.user:
         timez = g.user.get('timezone')
         try:
             # Validate if it's a valid timezone
-            
+
             return timezone(timez).zone
         except pytz.exceptions.UnknownTimeZoneError:
             pass

@@ -20,7 +20,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Determine the best match with our supported languages.
     """
     locale = request.args.get('locale')  # Get the value of 'locale' parameter
@@ -32,7 +32,7 @@ def get_locale():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """Function that returns an index page"""
     return render_template(
         "4-index.html", title=_("home_title"), header=_("home_header"))

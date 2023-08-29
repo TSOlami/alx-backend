@@ -20,14 +20,14 @@ babel = Babel(app)
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """Function that returns an index page"""
     return render_template(
         "3-index.html", title=_("home_title"), header=_("home_header"))
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Determine the best match with our supported languages.
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])

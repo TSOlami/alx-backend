@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
 from pytz import timezone
 import pytz.exceptions
-from datetime  import datetime
+from datetime import datetime
 
 # Mock user data
 users = {
@@ -79,7 +79,7 @@ def get_timezone():
     """Return a URL-provided or user time zone or set default to UTC
     """
 
-	# Get the value of 'timezone' from URL parameter
+    # Get the value of 'timezone' from URL parameter
     timez = request.args.get('timezone')
     if timez:
         try:
@@ -87,13 +87,13 @@ def get_timezone():
             return timezone(timez).zone
         except pytz.exceptions.UnknownTimeZoneError:
             pass
-    
+
     # Get the value of 'timezone' from user settings
     if g.user:
         timez = g.user.get('timezone')
         try:
             # Validate if it's a valid timezone
-            
+
             return timezone(timez).zone
         except pytz.exceptions.UnknownTimeZoneError:
             pass
@@ -103,6 +103,7 @@ def get_timezone():
     timez = default_timez
     return timez
 
+
 def get_current_time(timez):
     """Module for getting the current time for a user timezone
     """
@@ -110,14 +111,14 @@ def get_current_time(timez):
     current_time = current_time_in_timez.strftime("%b %d, %Y, %I:%M:%S %p")
     return current_time
 
+
 @app.route('/')
 def index():
     """Function that returns an index page
     """
     user_timez = get_timezone()  # Get user's inferred timezone
     current_time = get_current_time(user_timez)  # Get formatted time
-    
-    
+
     return render_template(
         "index.html", title=_("home_title"), header=_("home_header"),
         current_time=current_time)
