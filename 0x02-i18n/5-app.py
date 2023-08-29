@@ -39,7 +39,7 @@ def get_user():
 
 @app.before_request
 def before_request():
-    """Set it as a global"""
+    """Sets a user as global"""
     g.user = get_user()
 
 
