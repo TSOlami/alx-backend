@@ -81,7 +81,7 @@ def index():
     """Function that returns an index page
     """
     return render_template(
-        "5-index.html", title=_("home_title"), header=_("home_header"))
+        "6-index.html", title=_("home_title"), header=_("home_header"))
 
 
 if __name__ == '__main__':
