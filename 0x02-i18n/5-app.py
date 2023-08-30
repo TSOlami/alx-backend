@@ -48,7 +48,8 @@ def before_request():
 def get_locale() -> str:
     """Determine the best match with our supported languages.
     """
-    locale = request.args.get('locale', '')  # Get the value of 'locale' parameter
+    # Get the value of 'locale' parameter
+    locale = request.args.get('locale', '')
     if locale and locale in app.config["LANGUAGES"]:
         return locale  # Use the provided locale if it's valid
 
