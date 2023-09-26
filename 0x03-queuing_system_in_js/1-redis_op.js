@@ -15,7 +15,7 @@ client.on('error', (error) => {
 
 // Function to set a new school in Redis
 function setNewSchool(schoolName, value) {
-  client.set(schoolName, value, redis.print);
+  client.set(schoolName, value, print);
 }
 
 // Function to display the value of a school in Redis
