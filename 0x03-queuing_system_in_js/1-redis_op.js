@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import { createClient, print } from 'redis';
 
 // Create a Redis client
 const client = createClient();
@@ -21,7 +21,10 @@ function setNewSchool(schoolName, value) {
 // Function to display the value of a school in Redis
 function displaySchoolValue(schoolName) {
   client.get(schoolName, (err, reply) => {
-    if (err) throw err;
+    if (err) {
+		  console.log(err);
+      throw err;
+  	}
     console.log(reply);
   });
 }
