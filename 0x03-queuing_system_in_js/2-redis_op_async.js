@@ -1,7 +1,11 @@
 import { createClient } from 'redis';
+import { promisify } from 'util';
 
 // Create a Redis client
 const client = createClient();
+
+// Promisify the get method
+const asnycGet = promisify(client.get).bind(client);
 
 // Event handler for when the Redis client connects
 client.on('connect', () => {
@@ -19,10 +23,10 @@ function setNewSchool(schoolName, value) {
 }
 
 // Function to display the value of a school in Redis
-function displaySchoolValue(schoolName) {
-  client.get(schoolName, (err, reply) => {
+asnyc function displaySchoolValue(schoolName) {
+  const rep = await client.get(schoolName).catch((error) => {
     if (err) throw err;
-    console.log(reply);
+    console.log(rep);
   });
 }
 
